@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>View</title>
+</head>
+
+<body>
+    <table class="table table-dark">
+        
+        <thead>
+            <tr>
+                <th>Created By</th>
+                <th>Description</th>
+                <th>Travel Start Date</th>
+                <th>Travel End Date</th>
+                <th>Destination</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            
+            
+            <tr>
+                <td>{{ trip.trip_creator.first_name }} {{ trip.trip_creator.last_name }}</td>
+                <td>{{ trip.description }}</td>
+                <td>{{ trip.start_date|date:"SHORT_DATE_FORMAT"}}</td>
+                <td>{{ trip.end_date|date:"SHORT_DATE_FORMAT" }}</td>
+                <td>{{ trip.destination }}</td>
+                
+            </tr>
+            
+            
+        </tbody>
+    </table>
+
+    <h3> Other Users Attending </h3>
+    <ul>
+        {% for user in trip.trip_attendees.all %}
+        <li>{{ user.first_name }} {{user.last_name }}</li>
+        {% endfor %}
+    </ul>
+    
+    
+
+
+
+
+
+</body>
+
+</html>

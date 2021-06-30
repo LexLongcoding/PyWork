@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'logreg/style.css' %}">
+    <title>Wall</title>
+</head>
+
+<body>
+    <a href="/logout">Logout</a>
+    <h1>Wall Assignment</h1>
+    <h2> Welcome to {{ user.first_name }}'s wall</h2>
+    <form action="/new_post" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="message">New Post</label>
+            <input type="textarea" name="message" id="message" class="form-control">
+            <input type="submit" value="post">
+        </div>
+
+    </form>
+
+    <div id='posts'>
+        {% for post in wall_messages %}
+        <div class='one_post'>
+            <p class='post'>{{post.message}}</p>
+            <p class='poster'>By: <a href="/user_profile/{{post.poster.id}}">{{post.poster.first_name}} {{post.poster.last_name}}</a></p>
+            <a href="/like/{{post.id}}">Like Post</a>
+            <p>{{ post.user_likes.count }}</p>
+            <form action="/add_comment/{{post.id}}" method=POST>
+                {% csrf_token %}
+                Comment: <input type="text" name='comment'>
+                <input type="submit" value='submit'>
+            </form>
+            {% for comment in post.post_comments.all %}
+                <p>{{comment.comment}}</p>
+                <p>poster: {{comment.poster.first_name}} {{comment.poster.last_name}}</p>
+                <a href="/delete/{{comment.id}}">Delete</a>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+</body>
+
+</html>
+    

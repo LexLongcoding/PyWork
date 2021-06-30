@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Edit</title>
+    <h1>Edit Show</h1>
+    <form action="/shows/{{show.id}}/update" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" class="form-control" value="{{show.title}}">
+        </div>
+        <div class="form-group">
+            <label for="network">Network</label>
+            <input type="text" name="network" id="network" class="form-control" value="{{show.network}}">
+        </div>
+        <div class="form-group">
+            <label for="release_date">Release Date</label>
+            <input type="date" name="release_date" id="release_date" class="form-control" value="{{show.release_date|date:'Y-m-d'}}">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{show.description}}"</textarea>
+        <button class="btn btn-primary">Submit</button>
+
+    </form>
+
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Add Trip</title>
+</head>
+<body>
+    <h1>Add a Trip</h1>
+    <a href="/logout">Log Out</a>
+    <a href="/travels">Back</a>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form action="/create" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="destination">Destination</label>
+            <input type="text" name="destination" id="destination" class="form-control  form-control-sm w-50">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description" class="form-control form-control-sm w-50">
+        </div>
+        <div class="form-group">
+            <label for="start_date">Travel Date From</label>
+            <input type="date" name="start_date" id="start_date" class="form-control form-control-sm w-50">
+        </div>
+        <div class="form-group">
+            <label for="end_date">Travel Date To</label>
+            <input type="date" name="end_date" id="end_date" class="form-control form-control-sm w-50">
+        </div>
+        
+        <button class="btn btn-primary">Submit</button>
+
+    </form>
+
+
+    
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Destroy</title>
+</head>
+<body>
+    <div class="container mt-3 mx-auto w-50">
+        <p>Are you sure you want to delete the following course?</p>
+        <table class="table table-sm table-borderless mb-4">
+            <tbody class="small">
+                <tr>
+                    <td><b>Name</b></td>
+                    <td>{{ course.name }}</td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>{{ course.description.content }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <form action="/courses/{{course.id}}/delete" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Yes, I want to delete this!</button>
+            <a href="/courses" role="button" class="btn btn-secondary btn-sm">No, go back</a>
+        </form>
+    </div>
+    
+</body>
+</html>
