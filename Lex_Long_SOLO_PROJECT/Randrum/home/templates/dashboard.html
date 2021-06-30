@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Randrum</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/profile/{{user.id}}">Welcome, {{ user.username }}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/kit">New kit</a>
+                <a class="nav-item nav-link" href="/dashboard">Home</a>
+                <a class="nav-item nav-link" href="/logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <div class="container">
+            <h3> Recent Kits </h3>
+            <table class="table table-bordered table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Kit Name</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Date Created</th>
+                        <th scope="col">Add to favorites?</th>
+                        <th scope="col">Favorite counter</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for kit in ordered_kits %}
+                    <tr>
+                        <td> <a href="/kit/{{kit.id}}/view_kit">{{kit.title}}</a></td>
+                        <td>{{ kit.creator.username }}</td>
+                        <td>{{ kit.created_at }}</td>
+                        <td><a href="/kit/{{kit.id}}/add_favorite">add</a></td>
+                        <!-- <td><a href="/kit/{{kit.id}}/delete">delete</a></td> -->
+                        <td>{{ kit.favorited_by.count }}</td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    
+
+
+
+</body>
+
+</html>
